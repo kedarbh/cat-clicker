@@ -1,0 +1,17 @@
+#container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.cat {
+
+}
+
+img {
+	width: 300px;
+}
+
+.counter {
+	margin: 0 20px;
+}
