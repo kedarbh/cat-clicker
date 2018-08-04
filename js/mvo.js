@@ -4,24 +4,29 @@ let model = {
 	cats: [
 		{
 			name : 'Biralu',
-			imgSrc : 'images/cat1.jpeg'
+			imgSrc : 'images/cat1.jpeg',
+			clickCount: 0
 		},
 		{
 			name : 'Meow',
-			imgSrc : 'images/cat2.jpeg'
+			imgSrc : 'images/cat2.jpeg',
 			//Photo by Kelvin Valerio from Pexels
+			clickCount: 0
 		},
 		{
 			name : 'Kali',
-			imgSrc : 'images/cat3.jpeg'
+			imgSrc : 'images/cat3.jpeg',
+			clickCount: 0
 		},
 		{
 			name : 'Gori',
-			imgSrc : 'images/cat4.jpeg'
+			imgSrc : 'images/cat4.jpeg',
+			clickCount: 0
 		},
 		{
 			name : 'Rati',
-			imgSrc : 'images/cat5.jpeg'
+			imgSrc : 'images/cat5.jpeg',
+			clickCount: 0
 		}
 	]
 };
@@ -44,16 +49,20 @@ let octopus = {
 	setSelectedCat: function(cat) {
 		return model.selectedCat = cat;
 
+	},
+	clickCounter: function() {
+		model.selectedCat.clickCount++;
+		// console.log(model.selectedCat.clickCount);
+		viewCat.render();
 	}
-};
-
+}
 // view for diasplaying cat lists
 
 let viewCatList = {
 	init: function() {
 		this.catList = document.getElementById('cat-list');
 		// render cat list
-		this.render()
+		this.render();
 	},
 
 	render: function() {
@@ -63,7 +72,7 @@ let viewCatList = {
 			cat = cats[i];
 			list = document.createElement('li');
 			list.textContent = cat.name;
-
+			this.catList.appendChild(list);
 			//click event to set the selected cat to a new cat.
 			list.addEventListener('click', (function(meow) {
 				return function() {
@@ -72,7 +81,6 @@ let viewCatList = {
 					viewCat.render();
 				}
 			})(cat));
-			this.catList.appendChild(list);
 		}
 
 	}
@@ -86,15 +94,20 @@ let viewCat = {
 		this.catName = document.getElementById('cat-name');
 		this.countClick = document.getElementById('click-count');
 		this.catImg = document.getElementById('cat-image');
+		//detect the click and increase the counter
+		this.catImg.addEventListener('click', function(){
+			octopus.clickCounter();
+		});
 		this.render();
 	},
 	render: function() {
 		//render the image of selected cat
 		let currentCat = octopus.getSlectedCat();
+		this.catName.textContent = currentCat.name;
+		this.countClick.textContent = 'Clicks '+ currentCat.clickCount;
 		this.catImg.src = currentCat.imgSrc;
 	}
 };
-
 
 octopus.init();
 

@@ -1,7 +1,6 @@
-/*#container {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
+#container {
+	width: 500px;
+	margin: 0 auto;
 }
 
 .cat {
@@ -14,7 +13,7 @@ img {
 
 .counter {
 	margin: 0 20px;
-}*/
+}
 
 ul li{
 	list-style: none;
