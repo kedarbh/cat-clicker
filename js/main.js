@@ -28,9 +28,6 @@ Cat.prototype.update = function() {
 
 new Cat('Cat 1', 'images/cat1.jpeg');
 new Cat('Cat 2', 'images/cat2.jpeg');
-new Cat('Cat 3', 'images/cat2.jpeg');
-new Cat('Cat 4', 'images/cat2.jpeg');
-
 
 let cats = document.getElementsByTagName('img')
 let count = document.getElementsByTagName('h3');
