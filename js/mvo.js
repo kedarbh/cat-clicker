@@ -1,30 +1,27 @@
-
-let displayCat = document.getElementById('cat-display');
-
 // apps model
 let model = {
 	selectedCat: null,
 	cats: [
 		{
-			name : 'biralu',
-			imgSrc : 'images/cat1.jpg'
+			name : 'Biralu',
+			imgSrc : 'images/cat1.jpeg'
 		},
 		{
-			name : 'meow',
-			imgSrc : 'images/cat2.jpg'
+			name : 'Meow',
+			imgSrc : 'images/cat2.jpeg'
 			//Photo by Kelvin Valerio from Pexels
 		},
 		{
-			name : 'kali',
-			imgSrc : 'images/cat3.jpg'
+			name : 'Kali',
+			imgSrc : 'images/cat3.jpeg'
 		},
 		{
-			name : 'gori',
-			imgSrc : 'images/cat4.jpg'
+			name : 'Gori',
+			imgSrc : 'images/cat4.jpeg'
 		},
 		{
-			name : 'rati',
-			imgSrc : 'images/cat5.jpg'
+			name : 'Rati',
+			imgSrc : 'images/cat5.jpeg'
 		}
 	]
 };
@@ -37,6 +34,16 @@ let octopus = {
 		//initialize cat list and cat view
 		viewCatList.init();
 		viewCat.init();
+	},
+	getCat: function() {
+		return model.cats;
+	},
+	getSlectedCat: function() {
+		return model.selectedCat;
+	},
+	setSelectedCat: function(cat) {
+		return model.selectedCat = cat;
+
 	}
 };
 
@@ -50,6 +57,23 @@ let viewCatList = {
 	},
 
 	render: function() {
+		let cats = octopus.getCat();
+		// console.log(cats);
+		for (let i = 0; i < cats.length; i++) {
+			cat = cats[i];
+			list = document.createElement('li');
+			list.textContent = cat.name;
+
+			//click event to set the selected cat to a new cat.
+			list.addEventListener('click', (function(meow) {
+				return function() {
+					octopus.setSelectedCat(meow);
+					//change the view once the selection changes
+					viewCat.render();
+				}
+			})(cat));
+			this.catList.appendChild(list);
+		}
 
 	}
 };
@@ -62,7 +86,12 @@ let viewCat = {
 		this.catName = document.getElementById('cat-name');
 		this.countClick = document.getElementById('click-count');
 		this.catImg = document.getElementById('cat-image');
-
+		this.render();
+	},
+	render: function() {
+		//render the image of selected cat
+		let currentCat = octopus.getSlectedCat();
+		this.catImg.src = currentCat.imgSrc;
 	}
 };
 
