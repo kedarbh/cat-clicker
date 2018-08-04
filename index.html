@@ -7,18 +7,44 @@
 </head>
 <body>
 	<div id="container">
-		<div class="list">
-			<ul id="cat-list"></ul>
-		</div>
+		<div class="cat-view">
 
-		<div id="cat-display">
-			<h2 id="cat-name"></h2>
-			<p id="click-count"></p>
-			<img id="cat-image" src="" alt="cat image">
+			<div class="list">
+				<ul id="cat-list"></ul>
+			</div>
+
+			<div id="cat-display">
+				<h2 id="cat-name"></h2>
+				<p id="click-count"></p>
+				<img id="cat-image" src="" alt="cat image">
+			</div>
+		</div>
+		<div class="admin">
+			<button id="admin-button">Admin</button>
+			<div id="admin-info" class="hidden">
+				<form>
+					<div>
+						<label for="name-input">Name:</label>
+						<input type="text" id="name-input" name="cat-name" value="">
+					</div>
+					<div>
+						<label for="url-input">URL:</label>
+						<input type="text" id="url-input" name="image-url">
+					</div>
+					<div>
+						<label for="click-input">No. of Clicks:</label>
+						<input type="text" id="click-input" name="clicks">
+					</div>
+					<button id="cancel">Cancel</button>
+					<input type="submit" value="Save">
+
+				</form>
+			</div>
 		</div>
 	</div>
-
+	<!-- script for initial cat clicker -->
 	<!-- <script src="js/main.js"></script> -->
+	<!-- script for cat click premium -->
 	<script src="js/mvo.js"></script>
 </body>
 </html>

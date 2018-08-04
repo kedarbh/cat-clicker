@@ -39,6 +39,7 @@ let octopus = {
 		//initialize cat list and cat view
 		viewCatList.init();
 		viewCat.init();
+		amdinView.init();
 	},
 	getCat: function() {
 		return model.cats;
@@ -54,7 +55,14 @@ let octopus = {
 		model.selectedCat.clickCount++;
 		// console.log(model.selectedCat.clickCount);
 		viewCat.render();
+	},
+	showAdminArea: function() {
+		amdinView.showInfos.classList.remove('hidden');
+	},
+	hideAdminArea: function() {
+		amdinView.showInfos.classList.add('hidden');
 	}
+
 }
 // view for diasplaying cat lists
 
@@ -79,6 +87,7 @@ let viewCatList = {
 					octopus.setSelectedCat(meow);
 					//change the view once the selection changes
 					viewCat.render();
+					amdinView.render();
 				}
 			})(cat));
 		}
@@ -97,6 +106,7 @@ let viewCat = {
 		//detect the click and increase the counter
 		this.catImg.addEventListener('click', function(){
 			octopus.clickCounter();
+			amdinView.render();
 		});
 		this.render();
 	},
@@ -109,8 +119,35 @@ let viewCat = {
 	}
 };
 
+//view for admin area
+let amdinView = {
+	init: function() {
+		this.button = document.getElementById('admin-button');
+		this.cancelButton = document.getElementById('cancel');
+		this.showInfos = document.getElementById('admin-info');
+		this.nameValue = document.getElementById('name-input');
+		this.urlValue = document.getElementById('url-input');
+		this.clickValue = document.getElementById('click-input');
+		this.render();
+	},
+	render: function() {
+		let currentCat = octopus.getSlectedCat();
+		let cat = octopus.getCat();
+
+
+		this.button.addEventListener('click', function() {
+			octopus.showAdminArea();
+		});
+
+		this.cancelButton.addEventListener('click', function() {
+			octopus.hideAdminArea();
+		});
+
+		this.nameValue.value = currentCat.name;
+		this.urlValue.value = currentCat.imgSrc;
+		this.clickValue.value = currentCat.clickCount;
+
+	}
+};
+
 octopus.init();
-
-
-
-
